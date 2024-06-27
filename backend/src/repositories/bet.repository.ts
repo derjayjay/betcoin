@@ -17,6 +17,7 @@ class BetRepository extends Repository {
       sk: `bet#${id}`,
       state: 'open',
       priceAtCreation: btcPrice,
+      priceAtResolution: undefined,
       submittedAt: now.getTime(),
       ...bet,
     };
