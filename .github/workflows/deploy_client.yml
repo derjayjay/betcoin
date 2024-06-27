@@ -1,5 +1,8 @@
 name: Deploy client to S3
-on: [push]
+on:
+ push:
+  branches:
+   - main
 defaults:
  run:
   working-directory: ./client
