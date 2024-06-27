@@ -7,6 +7,7 @@ import ApiClient from '../api/ApiClient';
 import { Bet } from '../api/models';
 import { Countdown } from './Countdown';
 import { BettingForm } from './BettingForm';
+import { Celebration } from './Celebration';
 
 export const Game: React.FC = () => {
   const { userProfile, isProfileLoading, isProfileError } = useUserProfile();
@@ -38,19 +39,6 @@ export const Game: React.FC = () => {
       .then(() => updateGameState());
   };
 
-  const getCelebrationText = (state: 'won' | 'lost' | 'draw' | 'open' | 'expired' | undefined) => {
-    switch (state) {
-      case 'won':
-        return 'You won! 🤩';
-      case 'lost':
-        return 'You lost... 😢';
-      case 'draw':
-        return "It's a draw. 😐";
-      default:
-        return 'Something weird happened. 🤷‍♂️';
-    }
-  };
-
   if (isProfileError) {
     return <div className="text-red-500 text-center text-xl font-semibold">Failed to load user profile.</div>;
   }
@@ -74,8 +62,12 @@ export const Game: React.FC = () => {
         ) : uiState === 'resolving' ? (
           <div className="text-center text-4xl font-bold text-white animate-pulse">Resolving your bet...</div>
         ) : uiState === 'showResult' ? (
-          <div className="text-center text-4xl font-bold text-white animate-pulse">
-            {getCelebrationText(gameState.currentBet?.state)}
+          <div className="text-center text-sm/6 font-medium text-white/50">
+            <Celebration
+              betState={gameState.currentBet?.state}
+              priceAtCreation={gameState.currentBet?.priceAtCreation}
+              priceAtResolution={gameState.currentBet?.priceAtResolution}
+            />
           </div>
         ) : gameState.currentBet !== undefined && gameState.currentBet.state === 'open' ? (
           <Countdown

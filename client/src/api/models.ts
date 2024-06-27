@@ -14,4 +14,6 @@ export interface Bet {
   direction: 'up' | 'down';
   state: 'open' | 'expired' | 'won' | 'lost' | 'draw';
   submittedAt: number;
+  priceAtCreation: number | undefined;
+  priceAtResolution: number | undefined;
 }
