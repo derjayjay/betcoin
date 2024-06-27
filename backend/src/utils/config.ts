@@ -12,7 +12,7 @@ const config = cleanEnv(process.env, {
   DYNAMODB_AWS_REGION: str({ devDefault: testOnly('localhost') }),
   DYNAMODB_ENDPOINT: str({ devDefault: testOnly('http://localhost:8000'), default: undefined }),
   DYNAMODB_TABLE_NAME: str({ devDefault: testOnly('BETCOIN_TABLE') }),
-  DYNAMEDB_ACCESS_KEY_ID: str({ devDefault: testOnly('ACCESS_KEY_ID') }),
+  DYNAMODB_ACCESS_KEY_ID: str({ devDefault: testOnly('ACCESS_KEY_ID') }),
   DYNAMODB_SECRET_ACCESS_KEY: str({ devDefault: testOnly('SECRET_ACCESS_KEY') }),
   TRUST_REVERSE_PROXY: bool({ devDefault: testOnly(false) }),
   CORS_ORIGIN: str({ devDefault: testOnly('http://localhost:5173') }),

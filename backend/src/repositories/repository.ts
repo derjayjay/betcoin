@@ -17,7 +17,7 @@ export class Repository {
         region: config.DYNAMODB_AWS_REGION,
         endpoint: config.DYNAMODB_ENDPOINT,
         credentials: {
-          accessKeyId: config.DYNAMEDB_ACCESS_KEY_ID,
+          accessKeyId: config.DYNAMODB_ACCESS_KEY_ID,
           secretAccessKey: config.DYNAMODB_SECRET_ACCESS_KEY,
         },
       })
