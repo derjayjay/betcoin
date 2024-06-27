@@ -27,10 +27,10 @@ jobs:
           envkey_SERVER_NAME: ${{ vars.SERVER_NAME }}
           envkey_HOST: ${{ vars.BACKEND_HOST }}
           envkey_PORT: ${{ vars.BACKEND_PORT }}
-          envkey_DYNAMODB_AWS_REGION: ${{ vars.DYNAMODB_AWS_REGION }}
-          envkey_DYNAMODB_TABLE_NAME: ${{ vars.DYNAMODB_TABLE_NAME }}
-          envkey_DYNAMODB_ACCESS_KEY_ID: ${{ vars.DYNAMODB_ACCESS_KEY_ID }}
-          envkey_DYNAMODB_SECRET_ACCESS_KEY: ${{ vars.DYNAMODB_SECRET_ACCESS_KEY }}
+          envkey_DYNAMODB_AWS_REGION: ${{ secrets.AWS_REGION }}
+          envkey_DYNAMODB_TABLE_NAME: ${{ secrets.DYNAMODB_TABLE_NAME }}
+          envkey_DYNAMODB_ACCESS_KEY_ID: ${{ secrets.DYNAMODB_ACCESS_KEY_ID }}
+          envkey_DYNAMODB_SECRET_ACCESS_KEY: ${{ secrets.DYNAMODB_SECRET_ACCESS_KEY }}
           envkey_TRUST_REVERSE_PROXY: ${{ vars.TRUST_REVERSE_PROXY }}
           envkey_CORS_ORIGIN: ${{ vars.FRONTEND_URL }}
           envkey_RATE_LIMITING_COMMON_MAX_REQUESTS: ${{ vars.RATE_LIMITING_COMMON_MAX_REQUESTS }}
@@ -40,7 +40,7 @@ jobs:
           envkey_COINDESK_API_URL: ${{ vars.COINDESK_API_URL }}
           envkey_COINDESK_API_POLLING_RATE: ${{ vars.COINDESK_API_POLLING_RATE }}
           envkey_COINDESK_API_TIMEOUT: ${{ vars.COINDESK_API_TIMEOUT }}
-          envkey_JWT_ACCESS_SECRET: ${{ secrets.JWT_ACCESS_SECRET }}
+          envkey_JWT_ACCESS_TOKEN_SECRET: ${{ secrets.JWT_ACCESS_TOKEN_SECRET }}
           envkey_JWT_ACCESS_TOKEN_EXPIRATION: ${{ vars.JWT_ACCESS_TOKEN_EXPIRATION }}
           envkey_JWT_REFRESH_TOKEN_SECRET: ${{ secrets.JWT_REFRESH_TOKEN_SECRET }}
           envkey_JWT_REFRESH_TOKEN_EXPIRATION: ${{ vars.JWT_REFRESH_TOKEN_EXPIRATION }}
