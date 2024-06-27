@@ -3,6 +3,7 @@ on: [push]
 defaults:
  run:
   working-directory: ./client
+environment: production
 jobs:
   run:
     runs-on: ubuntu-latest
