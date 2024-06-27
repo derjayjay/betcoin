@@ -1,0 +1,64 @@
+name: Deploy backend to EBS
+on:
+ push:
+  branches:
+   - main
+defaults:
+ run:
+  working-directory: ./backend
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v2.0.3
+        with:
+          envkey_NODE_ENV: ${{ vars.NODE_ENV }}
+          envkey_LOG_LEVEL: ${{ vars.LOG_LEVEL }}
+          envkey_SERVER_NAME: ${{ vars.SERVER_NAME }}
+          envkey_HOST: ${{ vars.BACKEND_HOST }}
+          envkey_PORT: ${{ vars.BACKEND_PORT }}
+          envkey_DYNAMODB_AWS_REGION: ${{ vars.DYNAMODB_AWS_REGION }}
+          envkey_DYNAMODB_TABLE_NAME: ${{ vars.DYNAMODB_TABLE_NAME }}
+          envkey_DYNAMODB_ACCESS_KEY_ID: ${{ vars.DYNAMODB_ACCESS_KEY_ID }}
+          envkey_DYNAMODB_SECRET_ACCESS_KEY: ${{ vars.DYNAMODB_SECRET_ACCESS_KEY }}
+          envkey_TRUST_REVERSE_PROXY: ${{ vars.TRUST_REVERSE_PROXY }}
+          envkey_CORS_ORIGIN: ${{ vars.FRONTEND_URL }}
+          envkey_RATE_LIMITING_COMMON_MAX_REQUESTS: ${{ vars.RATE_LIMITING_COMMON_MAX_REQUESTS }}
+          envkey_RATE_LIMITING_COMMON_WINDOW_MIN: ${{ vars.RATE_LIMITING_COMMON_WINDOW_MIN }}
+          envkey_RATE_LIMITING_USER_MAX_FAILED_REQUESTS: ${{ vars.RATE_LIMITING_USER_MAX_FAILED_REQUESTS }}
+          envkey_RATE_LIMITING_USER_WINDOW_MIN: ${{ vars.RATE_LIMITING_USER_WINDOW_MIN }}
+          envkey_COINDESK_API_URL: ${{ vars.COINDESK_API_URL }}
+          envkey_COINDESK_API_POLLING_RATE: ${{ vars.COINDESK_API_POLLING_RATE }}
+          envkey_COINDESK_API_TIMEOUT: ${{ vars.COINDESK_API_TIMEOUT }}
+          envkey_JWT_ACCESS_SECRET: ${{ secrets.JWT_ACCESS_SECRET }}
+          envkey_JWT_ACCESS_TOKEN_EXPIRATION: ${{ vars.JWT_ACCESS_TOKEN_EXPIRATION }}
+          envkey_JWT_REFRESH_TOKEN_SECRET: ${{ secrets.JWT_REFRESH_TOKEN_SECRET }}
+          envkey_JWT_REFRESH_TOKEN_EXPIRATION: ${{ vars.JWT_REFRESH_TOKEN_EXPIRATION }}
+          file_name: backend/.env
+          fail_on_empty: false
+          sort_keys: false
+
+      - name: Build
+        run: npm run build
+      
+      - name: Build deployment package
+        run: cd dist && zip -r ../deploy.zip . -x '*.git*'
+
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v22
+        with:
+          application_name: ${{ secrets.EB_APPLICATION_NAME }}
+          environment_name: ${{ secrets.EB_ENVIRONMENT_NAME }}
+          version_label: 12345
+          region: ${{ secrets.AWS_REGION }}
+          deployment_package: backend/deploy.zip
