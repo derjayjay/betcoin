@@ -1,12 +1,15 @@
 import { differenceInSeconds } from 'date-fns';
 import pino, { Logger } from 'pino';
 
-import { BetDto } from '../models/bet.model';
+import { Bet, BetDto } from '../models/bet.model';
 import BetRepository from '../repositories/bet.repository';
 import UserRepository from '../repositories/user.repository';
 import config from '../utils/config';
 import { PriceService } from './price.service';
 
+/**
+ * Service responsible for managing and resolving bets.
+ */
 export class BetService {
   private readonly betRepository: BetRepository;
   private readonly userRepository: UserRepository;
@@ -20,6 +23,13 @@ export class BetService {
     this.logger = pino({ name: `${config.SERVER_NAME} - PriceService`, level: config.LOG_LEVEL });
   }
 
+  /**
+   * Registers a new bet for a user.
+   *
+   * @param userId - The ID of the user placing the bet.
+   * @param betDto - The data for the bet.
+   * @returns A promise that resolves to the ID of the created bet, or undefined if the bet could not be created.
+   */
   public async registerBet(userId: string, betDto: BetDto): Promise<string | undefined> {
     const btcPrice = this.priceService.getBtcPrice();
     const betId = await this.betRepository.createBet(userId, betDto, btcPrice.price);
@@ -31,8 +41,14 @@ export class BetService {
     return undefined;
   }
 
+  /**
+   * Checks if the latest bet of the user is still open.
+   * If the user has an overdue bet, it expires it.
+   *
+   * @param userId - The ID of the user.
+   * @returns A Promise that resolves to a boolean indicating whether the user has an open bet.
+   */
   public async hasOpenBet(userId: string): Promise<boolean | undefined> {
-    // check if a user has an open bet
     const userGame = await this.userRepository.getUserGame(userId);
     if (userGame === undefined) {
       this.logger.error(`Failed to retrieve open bets for user ${userId}.`);
@@ -52,10 +68,8 @@ export class BetService {
       return false;
     }
 
-    const now = new Date();
-    const creationDate = new Date(bet.submittedAt);
-    if (differenceInSeconds(now, creationDate) >= 90) {
-      // bet is overdue, we cannot resolve fairly
+    if (this.isBetOverdue(bet)) {
+      // bet is overdue
       await this.betRepository.expireBet(bet);
       return false;
     }
@@ -63,6 +77,35 @@ export class BetService {
     return true;
   }
 
+  /**
+   * Retrieves a bet for a specific user.
+   * If the bet is overdue, it will be expired.
+   *
+   * @param userId - The ID of the user.
+   * @param betId - The ID of the bet.
+   * @returns A Promise that resolves to the retrieved bet, or undefined if the bet does not exist.
+   */
+  public async getBet(userId: string, betId: string): Promise<Bet | undefined> {
+    const bet = await this.betRepository.getBet(userId, betId);
+    if (bet === undefined) {
+      return undefined;
+    }
+
+    if (this.isBetOverdue(bet)) {
+      // bet is overdue
+      await this.betRepository.expireBet(bet);
+    }
+
+    return bet;
+  }
+
+  /**
+   * Resolves a bet for a given user.
+   *
+   * @param userId - The ID of the user.
+   * @param betId - The ID of the bet.
+   * @returns void
+   */
   public async resolveBet(userId: string, betId: string) {
     const bet = await this.betRepository.getBet(userId, betId);
     const userGame = await this.userRepository.getUserGame(userId);
@@ -77,11 +120,9 @@ export class BetService {
       return;
     }
 
-    const now = new Date();
-    const creationDate = new Date(bet.submittedAt);
-    if (differenceInSeconds(now, creationDate) >= 90) {
+    if (this.isBetOverdue(bet)) {
       // bet is overdue, we cannot resolve fairly
-      this.betRepository.updateBetAndGame(userId, betId, { state: 'expired' }, { lastResult: 'draw' });
+      await this.betRepository.expireBet(bet);
       return;
     }
 
@@ -90,7 +131,7 @@ export class BetService {
       (btcPrice.price < bet.priceAtCreation && bet.direction === 'down')
     ) {
       // resolve bet as won
-      this.betRepository.updateBetAndGame(
+      await this.betRepository.updateBetAndGame(
         userId,
         betId,
         { state: 'won', priceAtResolution: btcPrice.price },
@@ -98,7 +139,7 @@ export class BetService {
       );
     } else if (bet.priceAtCreation === btcPrice.price) {
       // bet is a draw, no change to score
-      this.betRepository.updateBetAndGame(
+      await this.betRepository.updateBetAndGame(
         userId,
         betId,
         { state: 'draw', priceAtResolution: btcPrice.price },
@@ -106,7 +147,7 @@ export class BetService {
       );
     } else {
       // resolve bet as lost
-      this.betRepository.updateBetAndGame(
+      await this.betRepository.updateBetAndGame(
         userId,
         betId,
         { state: 'lost', priceAtResolution: btcPrice.price },
@@ -118,5 +159,20 @@ export class BetService {
         }
       );
     }
+  }
+
+  /**
+   * Checks if a bet is overdue.
+   * A bet is considered overdue if it is open and has been submitted more than 90 seconds ago.
+   *
+   * @param bet - The bet to check.
+   * @returns `true` if the bet is overdue, `false` otherwise.
+   */
+  private isBetOverdue(bet: Bet): boolean {
+    const now = new Date();
+    const submissionDate = new Date(bet.submittedAt);
+
+    // a bet is overdue if it is open and has been submitted more than 90 seconds ago
+    return bet.state === 'open' && differenceInSeconds(now, submissionDate) >= 90;
   }
 }

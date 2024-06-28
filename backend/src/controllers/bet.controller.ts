@@ -37,12 +37,19 @@ class BetController extends Controller {
     }
   };
 
+  /**
+   * Retrieves a specific bet for a user.
+   *
+   * @param req - The user request object.
+   * @param resp - The response object.
+   * @returns A Promise that resolves to the retrieved bet or an error message if the bet is not found.
+   */
   public getBet = async (req: UserRequest, resp: Response) => {
     const userId = this.validateId(resp, req.user);
     if (!userId) return;
 
     const betId = req.params.id;
-    const bet = await this.betRepository.getBet(userId, betId);
+    const bet = await this.betService.getBet(userId, betId);
     if (bet) {
       resp.status(StatusCodes.OK).send({
         direction: bet.direction,
