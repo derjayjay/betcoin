@@ -26,7 +26,7 @@ class UserRepository extends Repository {
     };
 
     const newUserGame: UserGame = {
-      pk: `${newUser.pk}#game`,
+      pk: `${newUser.pk}`,
       sk: 'game',
       score: 0,
       lastResult: 'new',
@@ -52,7 +52,7 @@ class UserRepository extends Repository {
    * Retrieves a game state by the user's ID.
    */
   public async getUserGame(userId: string): Promise<UserGame | undefined> {
-    return this.get(`user#${userId}#game`, 'game');
+    return this.get(`user#${userId}`, 'game');
   }
 
   /**
@@ -60,7 +60,7 @@ class UserRepository extends Repository {
    */
   public async addUserToken(userId: string, newTokenId: string, newToken: string): Promise<boolean> {
     const newUserToken: UserToken = {
-      pk: `user#${userId}`,
+      pk: `user#${userId}#tokens`,
       sk: `token#${newTokenId}`,
       refreshToken: newToken,
     };
@@ -72,14 +72,14 @@ class UserRepository extends Repository {
    * Retrieves a refresh token by id for a specific user.
    */
   public async getUserToken(userId: string, tokenId: string): Promise<UserToken | undefined> {
-    return this.get(`user#${userId}`, `token#${tokenId}`);
+    return this.get(`user#${userId}#tokens`, `token#${tokenId}`);
   }
 
   /**
    * Deletes a refresh token of a specific user.
    */
   public async deleteUserToken(userId: string, tokenId: string): Promise<boolean> {
-    return this.delete(`user#${userId}`, `token#${tokenId}`);
+    return this.delete(`user#${userId}#tokens`, `token#${tokenId}`);
   }
 }
 

@@ -28,7 +28,7 @@ class BetRepository extends Repository {
     // Add the new bet and the reference in the user's game to the database
     if (
       await this.putAndUpdate<Bet, UserGame>(newBet, {
-        pk: `user#${userId}#game`,
+        pk: `user#${userId}`,
         sk: 'game',
         records: { currentBet: id },
       })
@@ -64,7 +64,7 @@ class BetRepository extends Repository {
   ): Promise<boolean> {
     return this.updateMany<Bet | UserGame>(
       { pk: `user#${userId}#bets`, sk: `bet#${betId}`, records: bet },
-      { pk: `user#${userId}#game`, sk: 'game', records: game }
+      { pk: `user#${userId}`, sk: 'game', records: game }
     );
   }
 

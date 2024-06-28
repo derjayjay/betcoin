@@ -13,10 +13,10 @@ vi.mock('../services/price.service');
 
 describe('BetService', () => {
   const usersGames: Array<UserGame> = [
-    { pk: 'user#U1#game', sk: 'game', score: 0, currentBet: 'B3', lastResult: 'lost' },
-    { pk: 'user#U2#game', sk: 'game', score: 0, currentBet: 'B5', lastResult: 'won' },
-    { pk: 'user#U3#game', sk: 'game', score: 0, currentBet: 'B6', lastResult: 'won' },
-    { pk: 'user#U4#game', sk: 'game', score: 0, currentBet: '', lastResult: 'new' },
+    { pk: 'user#U1', sk: 'game', score: 0, currentBet: 'B3', lastResult: 'lost' },
+    { pk: 'user#U2', sk: 'game', score: 0, currentBet: 'B5', lastResult: 'won' },
+    { pk: 'user#U3', sk: 'game', score: 0, currentBet: 'B6', lastResult: 'won' },
+    { pk: 'user#U4', sk: 'game', score: 0, currentBet: '', lastResult: 'new' },
   ];
 
   const bets: Array<Bet> = [
@@ -117,7 +117,7 @@ describe('BetService', () => {
       const getUserGame = vi
         .spyOn(UserRepository.prototype, 'getUserGame')
         .mockImplementation(async (userId: string) => {
-          return usersGames.find((game) => game.pk === `user#${userId}#game`);
+          return usersGames.find((game) => game.pk === `user#${userId}`);
         });
       const getBet = vi
         .spyOn(BetRepository.prototype, 'getBet')
@@ -142,7 +142,7 @@ describe('BetService', () => {
       const getUserGame = vi
         .spyOn(UserRepository.prototype, 'getUserGame')
         .mockImplementation(async (userId: string) => {
-          return usersGames.find((game) => game.pk === `user#${userId}#game`);
+          return usersGames.find((game) => game.pk === `user#${userId}`);
         });
       const getBet = vi
         .spyOn(BetRepository.prototype, 'getBet')
@@ -167,7 +167,7 @@ describe('BetService', () => {
       const getUserGame = vi
         .spyOn(UserRepository.prototype, 'getUserGame')
         .mockImplementation(async (userId: string) => {
-          return usersGames.find((game) => game.pk === `user#${userId}#game`);
+          return usersGames.find((game) => game.pk === `user#${userId}`);
         });
       const getBet = vi
         .spyOn(BetRepository.prototype, 'getBet')
@@ -195,7 +195,7 @@ describe('BetService', () => {
       const getUserGame = vi
         .spyOn(UserRepository.prototype, 'getUserGame')
         .mockImplementation(async (userId: string) => {
-          return usersGames.find((game) => game.pk === `user#${userId}#game`);
+          return usersGames.find((game) => game.pk === `user#${userId}`);
         });
 
       // Act
@@ -212,7 +212,7 @@ describe('BetService', () => {
       const getUserGame = vi
         .spyOn(UserRepository.prototype, 'getUserGame')
         .mockImplementation(async (userId: string) => {
-          return usersGames.find((game) => game.pk === `user#${userId}#game`);
+          return usersGames.find((game) => game.pk === `user#${userId}`);
         });
 
       // Act
