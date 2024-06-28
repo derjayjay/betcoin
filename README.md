@@ -26,11 +26,11 @@ You can find the current version of the game at [https://betcoin.spherial.dev](h
 
 ## Getting started
 
-The repository contains two subfolders, `./client` and `./backend`, for the respective subproject.
+The repository contains two sub-folders, `./client` and `./backend`, for the respective subproject.
 
 ### Running the client locally
 
-To run the client locally, enter the `./client` folder and install the Node dependencies. Copy the content of `.env.template` to a new file `.env` and update it whereever your backend is running.
+To run the client locally, enter the `./client` folder and install the Node dependencies. Copy the content of `.env.template` to a new file `.env` and update it wherever your backend is running.
 
 Finally, you can launch the client.
 
@@ -61,7 +61,7 @@ Create a new table in your DynamoDB with a name of your chosing. Use `pk` for th
 Enter the `./backend` folder and install the Node dependencies. Copy the content of `.env.template` to a new file `.env` and update the settings. Most settings can be left untouched, but you need to update the following variables:
 
 - `PORT`: use whatever port is available on your machine. Remember to update the URL in the client configuration if you change the port
-- `CORS_ORIGIN`: replace the astersik with the port where the client is running
+- `CORS_ORIGIN`: replace the asterisk with the port where the client is running
 - `DYNAMODB_AWS_REGION`: set to the AWS region when running an AWS DynamoDB instance, otherwise leave unchanged
 - `DYNAMODB_ENDPOINT`: set to the DynamoDB url when using Docker or NoSQL Workbench or remove the variable when using an AWS instance
 - `DYNAMODB_TABLE_NAME`: set to the name of your table
@@ -102,7 +102,7 @@ To build the backend, update the Node environment in the `.env` file in the `./b
   - React with TypeScript
   - Vite toolkit as dev environment
   - SWR for data fetching
-  - Tailwind CSS for styling and Headless UI for some UI components
+  - Tailwind CSS for styling with Headless UI for some UI components
   - hosted on AWS S3 and distributed with CloudFront
 - Betcoin API, the backend
   - Express.js server app with TypeScript
@@ -122,35 +122,45 @@ Both client and backend are automatically deployed to their respective environme
 
 The Betcoin backend uses AWS DynamoDB, a NoSQL database using a key-value storage concept. It provides great scalability, is fully managed, and offers attractive pay-as-you-go pricing based on actual usage. The schema-less NoSQL approach allows for very flexible data modelling, making it much simpler to adapt the data model compared to relational databases, which require migrations.
 
-The disadvantages typically lie in limitations around query design and indexing. DynamoDB queries do not support the aggreation and sorting capabilites usually found in relational databases. The number of indexes per table is limited and maintaining them can be costly for write-intensive applications. However, these limitations do not apply to the relative simpel data model of Betcoin.
+The disadvantages typically lie in limitations around query design and indexing. DynamoDB queries do not support the aggregation and sorting capabilities usually found in relational databases. The number of indexes per table is limited and maintaining them can be costly for write-intensive applications. However, these limitations do not apply to the relative simple data model of Betcoin.
 
-Betcoin uses a single-table design where all data is stored in one table and identified by careful usage of partioning and sorting keys:
+Betcoin uses a single-table design where all data is stored in one table and identified by careful usage of partitioning and sorting keys:
 
 - user profile is stored under key `{pk: 'user#{userID}', sk: 'profile'}`
 - the state of a user's game is stored under key `{pk: 'user#{userID}', sk: 'game'}`
 - refresh tokens for a user are stored under key `{pk: 'user#{userID}#token', sk: 'token#{tokenID}'}`
 - the bets of a user are stored under key `{pk: 'user#{userID}#bets', sk: 'bet#{tokenID}'}`
 
-This design allows to fetch all relevant data with very few querys, but comes with some limitations: while it is easy to fetch all bets of a user, it would be very slow and cost-intensive to query for all bets of all users or fetch a single bet without knowing the user's ID. A possible remedy is using a secondery index over all bet IDs.
+This design allows to fetch all relevant data with very few queries, but comes with some limitations: while it is easy to fetch all bets of a user, it would be very slow and cost-intensive to query for all bets of all users or fetch a single bet without knowing the user's ID. A possible remedy is using a secondary index over all bet IDs.
 
 #### BTC Price
 
 Betcoin uses the CoinDesk API to fetch the current market price of Bitcoin. The data is updated every 30 seconds, hence Betcoin also polls the API every 30 seconds. The polling interval can be configured using the `.env` file of the backend.
 
-The client polls the Backend for the updated price every 30 seconds. This is fine for low traffic environments such as this simple project. An alternative, more efficient solution would be to use a WebSocket to push the new prices to the client.
+The client uses the simple solution of polling the backend for the updated price every 30 seconds. This is fine for this simple project. In a large-scale system, a better approach would be to use web sockets or server-side events for price handling. Since both come with their own drawbacks and complexities, polling was the best solution for the scope of this project.
 
 #### Management of Bet Resolution
 
-...
+Bets are managed by the Bet service in the backend. After submission of a new bet, the automatic resolution is scheduled. Scheduling is implemented using Node.js timers since they are lightweight and have a low overhead. This approach works reliable enough for the scope of this project to not warrant the additional resources required for job scheduling systems such as Agenda or Bull.
+
+A freshly submitted bet starts with the status `open`. When resolving, the Bet service checks the current price and the predicted direction, updates the user score accordingly and sets the bet state to either `won` or `lost`. For reasons of fairness, there are two additional states: in case the price did not change, possibly because of an issue fetching the current price, the bet state is set to `draw`. In case the submission of an open bet was over 90 seconds ago, the bet state is set to `expired` since it is guaranteed no longer possible to determin the BTC price at the point the bet should have been resolved. In both cases, the user's score is not updated.
+
+To ensure the user is not deadlocked because of the scheduled resolution having failed, e.g. due to a server restart, fetching a bet or trying to submit a new one will automatically expire open, overdue bets.
 
 #### Session Management
 
-...
+Betcoin uses JSON Web Tokens to handle authentication. Access and refresh tokens are stored in HTTP-only cookies. The access tokens have a short lifespan (5 min by default); the client uses a custom Axios interceptor that tries to automatically refresh the tokens on requests failing with `401 - Unauthorized`. Refresh tokens are stored in the database by the backend. They are removed on refresh and logout, but expired tokens are not automatically deleted. Since these tokens are no longer valid, they do not pose a risk worth the effort for a specific scheduled clean-up task.
+
+User are automatically logged in upon successful registration. They can also log in using their user ID, provided in the main UI. Calls against the user account related endpoints are more strictly rate-limited in order to prevent brute forcing. Together with the cryptographical randomness of the user ID, this provides "good enough" security for the nature of this project.
+
+The session management system allows for a user to be logged simultaneous in multipe sessions. The use of SWR in the client ensures that the user interface remains mostly in sync when interacting with the game.
 
 ### API
 
-...
+A Postman collection for the Betcoin API can be found [here](./doc/Betcoin%20API.postman_collection.json).
 
 ### User Interface
 
-...
+Here is a small preview of the game's user interface. If the embed does not work, you can find the image under [./doc/betcoin_ui.webp](./doc/betcoin_ui.webp).
+
+![Betcoin Client UI Demo](./doc//betcoin_ui.webp)

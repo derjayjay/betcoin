@@ -1,0 +1,1624 @@
+{
+	"info": {
+		"_postman_id": "6e45b309-e55e-43d6-a62e-0af46192f71c",
+		"name": "Betcoin API",
+		"description": "This collection provides an overview of the available API endpoints for the Betcoin backend.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36629200"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "refresh",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/auth/refresh",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"auth",
+										"refresh"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successful refresh",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/user/auth/refresh",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"user",
+												"auth",
+												"refresh"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "25"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "23"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 28 Jun 2024 20:45:25 GMT"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "1719610647"
+										},
+										{
+											"key": "RateLimit-Policy",
+											"value": "25;w=3600"
+										},
+										{
+											"key": "RateLimit-Limit",
+											"value": "25"
+										},
+										{
+											"key": "RateLimit-Remaining",
+											"value": "23"
+										},
+										{
+											"key": "RateLimit-Reset",
+											"value": "3122"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMWRDc3cySmtmUFc1SFlyU016dEZBIiwiaWF0IjoxNzE5NjA3NTI1LCJleHAiOjE3MTk5MDc1MjV9.dgpfV3ACvj-TnctwhMixPKBfikdZvhjWFU-_7sJBEfM; Max-Age=300; Path=/; Expires=Fri, 28 Jun 2024 20:50:25 GMT; HttpOnly; SameSite=Lax"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMWRDc3cySmtmUFc1SFlyU016dEZBIiwianRpIjoiNjJ4SEVoTnByQlpjNEVqS3F1a3U3UyIsImlhdCI6MTcxOTYwNzUyNSwiZXhwIjoxNzYyODA3NTI1fQ.8vqOuu9idJrYG8z6KTljMZvDymwZP_gPhdRFXqWIjw8; Max-Age=43200; Path=/user/auth; Expires=Sat, 29 Jun 2024 08:45:25 GMT; HttpOnly; SameSite=Lax"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "2"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"2-nOO9QiTIwXgNtWtBJezz8kv3SLc\""
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "OK"
+								},
+								{
+									"name": "Expired refresh token",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/user/auth/refresh",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user",
+												"auth",
+												"refresh"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "25"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "18"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 28 Jun 2024 21:10:36 GMT"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "1719610647"
+										},
+										{
+											"key": "RateLimit-Policy",
+											"value": "25;w=3600"
+										},
+										{
+											"key": "RateLimit-Limit",
+											"value": "25"
+										},
+										{
+											"key": "RateLimit-Remaining",
+											"value": "18"
+										},
+										{
+											"key": "RateLimit-Reset",
+											"value": "1611"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "9"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"9-PatfYBLj4Um1qTm5zrukoLhNyPU\""
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "Forbidden"
+								}
+							]
+						},
+						{
+							"name": "logout",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/auth/logout",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successful logout",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/user/auth/logout",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"user",
+												"auth",
+												"logout"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "25"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "23"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 28 Jun 2024 20:46:26 GMT"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "1719610647"
+										},
+										{
+											"key": "RateLimit-Policy",
+											"value": "25;w=3600"
+										},
+										{
+											"key": "RateLimit-Limit",
+											"value": "25"
+										},
+										{
+											"key": "RateLimit-Remaining",
+											"value": "23"
+										},
+										{
+											"key": "RateLimit-Reset",
+											"value": "3061"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "2"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"2-nOO9QiTIwXgNtWtBJezz8kv3SLc\""
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "OK"
+								}
+							]
+						}
+					],
+					"description": "The endpoints under `/user/auth/` are the only endpoints able to receive the refresh token."
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Franz Gans\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful registration",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Franz Gans\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/user/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "25"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "23"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 Jun 2024 20:40:59 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1719610647"
+								},
+								{
+									"key": "RateLimit-Policy",
+									"value": "25;w=3600"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "25"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "23"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "3388"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMWRDc3cySmtmUFc1SFlyU016dEZBIiwiaWF0IjoxNzE5NjA3MjU5LCJleHAiOjE3MTk5MDcyNTl9.5eMh3KKkTvGwZ6FsztdOhKBMVi2BPExoVUPDHKK68Qs; Max-Age=300; Path=/; Expires=Fri, 28 Jun 2024 20:45:59 GMT; HttpOnly; SameSite=Lax"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMWRDc3cySmtmUFc1SFlyU016dEZBIiwianRpIjoiRHAyenZrVXJ3eVFjS3N6ZDRhVXlkUCIsImlhdCI6MTcxOTYwNzI1OSwiZXhwIjoxNzYyODA3MjU5fQ.mRcf_lOZu9FYV1ZzlSXmLXYqZ26Ew-v6-8U-cu1xS4M; Max-Age=43200; Path=/user/auth; Expires=Sat, 29 Jun 2024 08:40:59 GMT; HttpOnly; SameSite=Lax"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "35"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"23-eXq3F0ho1/eT1tpKF7z5kbs3ACI\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userId\": \"21dCsw2JkfPW5HYrSMztFA\"\n}"
+						},
+						{
+							"name": "Illegal name",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Franz!\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "25"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "20"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 Jun 2024 21:07:40 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1719610647"
+								},
+								{
+									"key": "RateLimit-Policy",
+									"value": "25;w=3600"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "25"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "20"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "1787"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "121"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"79-41h9h9Qn6HeJZH0CJfB1MY69eCQ\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"\\\"name\\\" with value \\\"Franz!\\\" fails to match the required pattern: /^[a-zA-Z0-9][a-zA-Z0-9 _-]*[a-zA-Z0-9]$/\"\n}"
+						}
+					]
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"{{userID}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": {{userId}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/user/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "25"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "23"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 Jun 2024 20:41:17 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1719610647"
+								},
+								{
+									"key": "RateLimit-Policy",
+									"value": "25;w=3600"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "25"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "23"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "3370"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMWRDc3cySmtmUFc1SFlyU016dEZBIiwiaWF0IjoxNzE5NjA3Mjc3LCJleHAiOjE3MTk5MDcyNzd9.pl_7RhjVCiV5LPYjb4IWUFxvSAUJXxo_TlFaaHgG2-I; Max-Age=300; Path=/; Expires=Fri, 28 Jun 2024 20:46:17 GMT; HttpOnly; SameSite=Lax"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMWRDc3cySmtmUFc1SFlyU016dEZBIiwianRpIjoiR2U0cmRLMjZYa2hKWjY1d3ZKTXFZIiwiaWF0IjoxNzE5NjA3Mjc3LCJleHAiOjE3NjI4MDcyNzd9.BmGmk1O0u6fhQfKij67RFhl8CXxmTVt46pRLHcZJy0I; Max-Age=43200; Path=/user/auth; Expires=Sat, 29 Jun 2024 08:41:17 GMT; HttpOnly; SameSite=Lax"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "35"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"23-eXq3F0ho1/eT1tpKF7z5kbs3ACI\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userId\": \"21dCsw2JkfPW5HYrSMztFA\"\n}"
+						},
+						{
+							"name": "Failed Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": \"{{userID}}a\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "25"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "19"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 Jun 2024 21:08:47 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1719610647"
+								},
+								{
+									"key": "RateLimit-Policy",
+									"value": "25;w=3600"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "25"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "19"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "1720"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "32"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"20-yxQFTplh3RfL71awCi8eDYczyWc\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Invalid id provided.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/user/profile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"user",
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "25"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "23"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 Jun 2024 20:43:02 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1719610647"
+								},
+								{
+									"key": "RateLimit-Policy",
+									"value": "25;w=3600"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "25"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "23"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "3265"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-j3Q6kofl5bipOs1otcaNIklZzXc\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"21dCsw2JkfPW5HYrSMztFA\",\n    \"name\": \"Franz Gans\"\n}"
+						}
+					]
+				},
+				{
+					"name": "game",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/game",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"game"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/user/game",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"user",
+										"game"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "25"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "23"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 Jun 2024 20:43:42 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1719610647"
+								},
+								{
+									"key": "RateLimit-Policy",
+									"value": "25;w=3600"
+								},
+								{
+									"key": "RateLimit-Limit",
+									"value": "25"
+								},
+								{
+									"key": "RateLimit-Remaining",
+									"value": "23"
+								},
+								{
+									"key": "RateLimit-Reset",
+									"value": "3225"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e-mjK32mci35U9/2hFsM73I/37x6M\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"score\": 0,\n    \"lastResult\": \"new\",\n    \"currentBet\": \"\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The `/user/` endpoints provides access to various user profile related operations, including registration, login token refresh."
+		},
+		{
+			"name": "bets",
+			"item": [
+				{
+					"name": "{{betID}}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bets/{{betID}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bets",
+								"{{betID}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/bets/2JnKagLE6vLQscbNPnouXK",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"bets",
+										"2JnKagLE6vLQscbNPnouXK"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "116"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"74-UVgqNwyHqQb61HGFvpkagz7nojI\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 Jun 2024 20:57:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"direction\": \"up\",\n    \"state\": \"won\",\n    \"submittedAt\": 1719608159604,\n    \"priceAtCreation\": 60165.91,\n    \"priceAtResolution\": 60189.82\n}"
+						}
+					]
+				},
+				{
+					"name": "submit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"direction\": \"up\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bets/submit",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bets",
+								"submit"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful submission",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"direction\": \"up\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/bets/submit",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"bets",
+										"submit"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"22-1/chV6Rj6gTsC3g8rXxGODsstr0\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 Jun 2024 20:55:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"betId\": \"2JnKagLE6vLQscbNPnouXK\"\n}"
+						},
+						{
+							"name": "Successful submission",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"direction\": \"down\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/bets/submit",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"bets",
+										"submit"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"22-klS7np98SpDEZcmjpNeCLKj/sDM\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 Jun 2024 21:19:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"betId\": \"4uFnC82PMyvRYmPVApu8An\"\n}"
+						},
+						{
+							"name": "Already has an open bet",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"direction\": \"up\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/bets/submit",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"bets",
+										"submit"
+									]
+								}
+							},
+							"status": "Not Acceptable",
+							"code": 406,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-S/VOwdKi/G3m8i3Oj+0o2xXGrBg\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 Jun 2024 20:56:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "User 21dCsw2JkfPW5HYrSMztFA already has an open bet"
+						}
+					]
+				}
+			],
+			"description": "The endpoints under `/bet/` are responsible for fetching and submitting new bets."
+		},
+		{
+			"name": "price",
+			"item": [
+				{
+					"name": "btc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/price/btc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"price",
+								"btc"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/price/btc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"price",
+										"btc"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "58"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3a-JZ+RAbE5EvL+8cA4qhHi87sZ7A0\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 Jun 2024 20:58:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"price\": 60186.64,\n    \"updatedAt\": \"2024-06-28T20:58:13+00:00\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The endpoint under `/price/` provides the current price."
+		},
+		{
+			"name": "health",
+			"item": [
+				{
+					"name": "isAlive",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/health/isAlive",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"health",
+								"isAlive"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/health/isAlive",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"health",
+										"isAlive"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "5"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5-z4oWkhaZI462UX7q2NagPka1Bsg\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 Jun 2024 20:58:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Alive"
+						}
+					]
+				}
+			],
+			"description": "The endpoint under `/health/` serves as checking endpoint for the load balancer."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "userID",
+			"value": "21dCsw2JkfPW5HYrSMztFA",
+			"type": "string"
+		},
+		{
+			"key": "betID",
+			"value": "2JnKagLE6vLQscbNPnouXK"
+		}
+	]
+}
