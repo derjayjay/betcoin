@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Mock, vi } from 'vitest';
 
 import config from '../../utils/config';
-import { BtcPrice, CoinDeskResponse, PriceService } from '../price.service';
+import { BtcPrice, PriceService } from '../price.service';
 
 vi.mock('axios');
 vi.useFakeTimers();
@@ -65,7 +65,7 @@ describe('PriceService', () => {
 
   it('should handle errors gracefully when fetching the BTC price from CoinDesk API', async () => {
     // Arrange
-    const mockResponse: CoinDeskResponse = {
+    const mockResponse = {
       time: {
         updatedISO: new Date('2024-06-26T08:35:25Z'),
       },
@@ -95,7 +95,7 @@ describe('PriceService', () => {
 
   it('should periodically fetch the BTC price from CoinDesk API', async () => {
     // Arrange
-    const mockResponse: CoinDeskResponse = {
+    const mockResponse = {
       time: {
         updatedISO: new Date('2024-06-26T08:35:25Z'),
       },
