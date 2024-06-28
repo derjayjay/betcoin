@@ -15,8 +15,10 @@ export const Celebration: React.FC<CelebrationProps> = ({ betState, priceAtCreat
         return 'You lost... 😢';
       case 'draw':
         return "It's a draw. 😐";
+      case 'expired':
+        return 'Your bet expired. 😵';
       default:
-        return 'Something weird happened. 🤷‍♂️';
+        return 'Something weird happened. 😨';
     }
   };
 
