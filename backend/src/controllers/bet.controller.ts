@@ -6,7 +6,6 @@ import { BetDto } from '../models/bet.model';
 import BetRepository from '../repositories/bet.repository';
 import { BetService } from '../services/bet.service';
 import { Controller } from './controller';
-import { Amp } from 'aws-sdk';
 
 class BetController extends Controller {
   private readonly betService: BetService;
@@ -18,6 +17,10 @@ class BetController extends Controller {
     this.betRepository = new BetRepository();
   }
 
+  /**
+   * Submits a new bet for the user.
+   * If the user already has an open bet, it sends a response with status NOT_ACCEPTABLE.
+   */
   public submitBet = async (req: UserRequest, resp: Response) => {
     const userId = this.validateId(resp, req.user);
     if (!userId) return;

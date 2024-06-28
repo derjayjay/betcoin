@@ -9,6 +9,9 @@ export interface UserRequest extends Request {
   user?: string;
 }
 
+/**
+ * Middleware function to authenticate the JWT access token.
+ */
 export const authenticateToken: RequestHandler = (req: UserRequest, res: Response, next: NextFunction) => {
   const accessToken = req.cookies.accessToken;
 

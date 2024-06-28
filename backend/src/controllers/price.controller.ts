@@ -12,6 +12,9 @@ class PriceController extends Controller {
     this.priceService = PriceService.getInstance();
   }
 
+  /**
+   * Retrieves the BTC price and sends it as a response.
+   */
   public getBtcPrice = (_req: Request, resp: Response) => {
     const btcPrice = this.priceService.getBtcPrice();
     resp.status(StatusCodes.OK).send({

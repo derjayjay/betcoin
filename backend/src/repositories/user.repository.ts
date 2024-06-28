@@ -3,11 +3,20 @@ import { uuid58 } from 'uuid-base58';
 import { ProfileDto, UserGame, UserProfile, UserToken } from '../models/user.model';
 import { Repository } from './repository';
 
+/**
+ * Repository class for managing user data in the database.
+ */
+/**
+ * Repository class for managing user profiles and game states in the database.
+ */
 class UserRepository extends Repository {
   public constructor(tableName?: string) {
     super(tableName, 'UserRepository');
   }
 
+  /*
+   * Creates a new user profile and game state in the database.
+   */
   public async createUser(user: ProfileDto): Promise<string | undefined> {
     const id = uuid58();
     const newUser: UserProfile = {
@@ -32,15 +41,23 @@ class UserRepository extends Repository {
     return undefined;
   }
 
-  // ...
+  /**
+   * Retrieves a user profile by their ID.
+   */
   public async getUser(id: string): Promise<UserProfile | undefined> {
     return this.get(`user#${id}`, 'profile');
   }
 
-  public async getUserGame(id: string): Promise<UserGame | undefined> {
-    return this.get(`user#${id}#game`, 'game');
+  /**
+   * Retrieves a game state by the user's ID.
+   */
+  public async getUserGame(userId: string): Promise<UserGame | undefined> {
+    return this.get(`user#${userId}#game`, 'game');
   }
 
+  /**
+   * Adds a refresh token for the user to the database.
+   */
   public async addUserToken(userId: string, newTokenId: string, newToken: string): Promise<boolean> {
     const newUserToken: UserToken = {
       pk: `user#${userId}`,
@@ -51,10 +68,16 @@ class UserRepository extends Repository {
     return this.put<UserToken>(newUserToken);
   }
 
+  /**
+   * Retrieves a refresh token by id for a specific user.
+   */
   public async getUserToken(userId: string, tokenId: string): Promise<UserToken | undefined> {
     return this.get(`user#${userId}`, `token#${tokenId}`);
   }
 
+  /**
+   * Deletes a refresh token of a specific user.
+   */
   public async deleteUserToken(userId: string, tokenId: string): Promise<boolean> {
     return this.delete(`user#${userId}`, `token#${tokenId}`);
   }

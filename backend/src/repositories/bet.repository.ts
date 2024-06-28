@@ -9,6 +9,9 @@ class BetRepository extends Repository {
     super(tableName, 'BetRepository');
   }
 
+  /**
+   * Adds a new bet to the database and updates the user's game to reference the new bet.
+   */
   public async createBet(userId: string, bet: BetDto, btcPrice: number): Promise<string | undefined> {
     const id = uuid58();
     const now = new Date();
@@ -22,7 +25,7 @@ class BetRepository extends Repository {
       ...bet,
     };
 
-    // Add the new user and the score to the database
+    // Add the new bet and the reference in the user's game to the database
     if (
       await this.putAndUpdate<Bet, UserGame>(newBet, {
         pk: `user#${userId}#game`,
@@ -36,14 +39,23 @@ class BetRepository extends Repository {
     return undefined;
   }
 
+  /**
+   * Retrieves a bet of a specific user.
+   */
   public async getBet(userId: string, betId: string): Promise<Bet | undefined> {
     return this.get(`user#${userId}#bets`, `bet#${betId}`);
   }
 
+  /**
+   * Udaptes a bet of a specific user.
+   */
   public async updateBet(userId: string, betId: string, bet: Partial<Bet>): Promise<boolean> {
     return this.update(`user#${userId}#bets`, `bet#${betId}`, bet);
   }
 
+  /**
+   * Updates a bet and the user's game.
+   */
   public async updateBetAndGame(
     userId: string,
     betId: string,
@@ -56,6 +68,9 @@ class BetRepository extends Repository {
     );
   }
 
+  /**
+   * Expires a bet by updating its state to 'expired'.
+   */
   public async expireBet(bet: Bet): Promise<boolean> {
     return this.update<Bet>(bet.pk, bet.sk, { state: 'expired' });
   }
