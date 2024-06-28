@@ -45,6 +45,9 @@ jobs:
           fail_on_empty: false
           sort_keys: false
 
+      - name: Unit Tests
+        run: npm run test
+        
       - name: Build
         run: npm run build
       
