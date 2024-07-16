@@ -100,7 +100,7 @@ class ApiClient {
    * @returns A Promise that resolves to a UserProfile object if successful, or undefined if there was an error.
    */
   public async getUserProfile(): Promise<UserProfile | undefined> {
-    return await this.api
+    return this.api
       .get<UserProfile>('/user/profile')
       .then((response) => {
         return response.data;
@@ -117,7 +117,7 @@ class ApiClient {
    * @returns A Promise that resolves to the ID of the created bet, or undefined if the bet could not be created.
    */
   public async submitBet(direction: 'up' | 'down'): Promise<string | undefined> {
-    return await this.api
+    return this.api
       .post('/bets/submit', { direction: direction })
       .then((response) => {
         return response.data.id;

@@ -24,7 +24,7 @@ class AuthClient {
   }
 
   async login(userId: string): Promise<boolean> {
-    return await this.api
+    return this.api
       .post<{ userId: string }>('/user/login', { userId: userId })
       .then((response) => {
         localStorage.setItem('userId', response.data.userId);
@@ -37,7 +37,7 @@ class AuthClient {
   }
 
   public async register(userName: string): Promise<boolean> {
-    return await this.api
+    return this.api
       .post<{ userId: string }>('/user/register', { name: userName })
       .then((response) => {
         localStorage.setItem('userId', response.data.userId);
@@ -50,7 +50,7 @@ class AuthClient {
   }
 
   public async refreshToken(): Promise<boolean> {
-    return await this.api
+    return this.api
       .get<{ userId: string }>('/user/auth/refresh')
       .then(() => {
         return true;
@@ -62,7 +62,7 @@ class AuthClient {
   }
 
   public async logout(): Promise<boolean> {
-    return await this.api
+    return this.api
       .get<boolean>('/user/auth/logout')
       .then(() => {
         return true;
